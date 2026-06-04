@@ -6,7 +6,7 @@ A collection of indicators, filters, and backtest utilities I use in my trading 
 
 ## Features
 
-- **Indicators:** RSI, EMA, Bollinger Bands, VWAP, MACD
+- **Indicators:** RSI, EMA, Bollinger Bands, VWAP, MACD, **RVWAP**
 - **Filters:** Kalman filter, Butterworth low-pass, noise reduction
 - **Backtest:** Event-driven backtesting engine with position management
 - **Signals:** Multi-timeframe signal aggregation and scoring
@@ -31,12 +31,24 @@ print(f"Sharpe: {results.sharpe_ratio:.2f}")
 
 ```
 signals/
-├── indicators/     # Technical indicators
+├── indicators/     # Technical indicators (RSI, EMA, VWAP, RVWAP, ...)
 ├── filters/        # Signal processing filters
 ├── backtest/       # Backtesting engine
 ├── models/         # Prediction models
 └── utils/          # Helpers
+tools/
+└── rvwap_efficiency.py  # CLI: market efficiency analyzer
 ```
+
+## RVWAP Market Efficiency
+
+Analyze market efficiency using Realized Volume Weighted Average Price:
+
+```bash
+python tools/rvwap_efficiency.py --symbol BTCUSDT --interval 1h --chart --backtest
+```
+
+Scores market efficiency 0-100 based on deviation, mean-reversion speed, volume consistency, and z-score stability. Generates signals: `STRONG_LONG`, `WEAK_LONG`, `NEUTRAL`, `WEAK_SHORT`, `STRONG_SHORT`.
 
 ## Install
 
